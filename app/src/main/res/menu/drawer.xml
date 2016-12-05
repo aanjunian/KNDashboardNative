@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/groupListMenu">
+
+        <item
+            android:id="@+id/home"
+            android:checked="true"
+            android:icon="@drawable/ic_home_black"
+            android:orderInCategory="0"
+            android:title="Home"
+            app:actionLayout="@layout/menu_counter"/>
+
+    </group>
+
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/groupListMenu1">
+
+        <item
+            android:id="@+id/reward"
+            android:icon="@drawable/ic_star"
+            android:orderInCategory="1"
+            android:title="Reward"
+            app:actionLayout="@layout/menu_counter"/>
+
+        <item
+            android:id="@+id/banner"
+            android:icon="@drawable/ic_image"
+            android:orderInCategory="1"
+            android:title="Banner"
+            app:actionLayout="@layout/menu_counter"/>
+
+        <item
+            android:id="@+id/report"
+            android:icon="@drawable/ic_assignment"
+            android:orderInCategory="1"
+            android:title="Report"
+            app:actionLayout="@layout/menu_counter"/>
+
+        <item
+            android:id="@+id/checkinGeo"
+            android:icon="@drawable/ic_map"
+            android:orderInCategory="1"
+            android:title="Checkin Geolocation"
+            app:actionLayout="@layout/menu_counter"/>
+
+        <item
+            android:id="@+id/pushData"
+            android:icon="@drawable/ic_person"
+            android:orderInCategory="1"
+            android:title="Push Data"
+            app:actionLayout="@layout/menu_counter"/>
+
+    </group>
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/groupListfooter">
+
+        <item
+            android:id="@+id/historyCheckin"
+            android:checked="false"
+            android:orderInCategory="2"
+            android:title="History Checkin" />
+
+        <!--<item-->
+            <!--android:id="@+id/information"-->
+            <!--android:checked="false"-->
+            <!--android:orderInCategory="2"-->
+            <!--android:title="Information" />-->
+
+        <item
+            android:id="@+id/logout"
+            android:checked="false"
+            android:orderInCategory="2"
+            android:title="Logout" />
+    </group>
+
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/groupVersion">
+
+    </group>
+</menu>

@@ -1,0 +1,119 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F0F0F0"
+    tools:context="com.kalbenutritionals.xteamnative.MainMenu"
+    android:id="@+id/coordinatorLayout">
+
+    <ScrollView
+        android:id="@+id/sv_banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/rl_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!--<com.daimajia.slider.library.SliderLayout-->
+                <!--android:id="@+id/slider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="200dp"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/slider"-->
+                <!--android:text="Periode"-->
+                <!--android:id="@+id/textView22"-->
+                <!--android:layout_marginTop="10dp" />-->
+
+            <!--<Spinner-->
+                <!--android:id="@+id/spnMonth_reward"-->
+                <!--android:layout_below="@+id/textView22"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/bg_edtext" />-->
+
+            <!--<Spinner-->
+                <!--android:id="@+id/spnYears_reward"-->
+                <!--android:layout_below="@+id/spnMonth_reward"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/bg_edtext"/>-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/spnYears_reward"-->
+                <!--android:text="Region"-->
+                <!--android:id="@+id/textView2"-->
+                <!--android:layout_marginTop="10dp" />-->
+
+            <!--<Spinner-->
+                <!--android:id="@+id/spnRegion"-->
+                <!--android:layout_below="@+id/textView2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/bg_edtext" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Branch"-->
+                <!--android:id="@+id/textView"-->
+                <!--android:layout_below="@+id/spnRegion"-->
+                <!--android:layout_marginTop="10dp" />-->
+
+            <!--<Spinner-->
+                <!--android:id="@+id/spnBranch"-->
+                <!--android:layout_below="@+id/textView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/bg_edtext" />-->
+
+            <!--&lt;!&ndash;<DatePicker&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/datePicker"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:calendarViewShown="false"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@+id/slider"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentStart="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentEnd="true" />&ndash;&gt;-->
+
+            <!--<Button-->
+                <!--android:text="View Data"-->
+                <!--android:layout_below="@+id/spnBranch"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/btnView"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@drawable/button"/>-->
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvAllBanner"
+                android:layout_below="@+id/btnView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:scrollbars="vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

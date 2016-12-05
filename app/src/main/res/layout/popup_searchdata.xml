@@ -1,0 +1,205 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F0F0F0"
+    tools:context="com.kalbenutritionals.xteamnative.MainMenu"
+    android:id="@+id/coordinatorLayout">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_region_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Region"
+        android:textColor="#000" />
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_region_pop"
+        android:layout_marginTop="10dp"
+        android:background="#bfbfbf" />
+    <TextView
+        android:id="@+id/tv_branch_pop"
+        android:layout_below="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Branch"
+        android:textColor="#000"/>
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_branch_pop"
+        android:layout_marginTop="10dp"
+        android:background="#bfbfbf" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type Search"
+        android:id="@+id/tv_type_search"
+        android:layout_weight="1"
+        android:layout_below="@+id/view2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rg_type_search_pop"
+        android:layout_below="@+id/tv_type_search">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outlet Id"
+            android:checked="true"
+            android:id="@+id/rb_outletID_pop"
+            android:layout_below="@+id/tv_type_search"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outlet Name"
+            android:id="@+id/rb_outletName_pop"
+            android:layout_below="@+id/rb_outletID"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RadioGroup>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rg_type_search_pop"
+        android:background="#bfbfbf" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl_typeoutletgrup_pop"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/view3"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_type_outlet_pop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Type Outlet"
+            android:textColor="#000"/>
+
+        <Spinner
+            android:id="@+id/spn_type_outlet_pop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_type_outlet_pop"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/bg_edtext" />
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#bfbfbf"
+            android:layout_below="@+id/spn_type_outlet_pop"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Outlet Id :"
+        android:id="@+id/tv_outletID_pop"
+        android:layout_weight="1"
+        android:layout_below="@+id/rl_typeoutletgrup_pop"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000"/>
+
+    <EditText
+        android:lines="1"
+        android:gravity="top|left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_searchDataPop"
+        android:imeActionLabel="Search"
+        android:imeOptions="actionUnspecified"
+        android:background="@drawable/bg_edtext"
+        android:ems="10"
+        android:layout_weight="1"
+        android:singleLine="true"
+        android:drawableRight="@drawable/ic_search_black_24dp"
+        android:layout_below="@+id/tv_outletID_pop"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/et_searchDataPop"
+            android:id="@+id/relativeLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Press Button "
+                android:id="@+id/tv_guide"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:textColor="#000"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_search_black_24dp"
+                android:layout_alignBottom="@+id/tv_guide"
+                android:layout_toRightOf="@+id/tv_guide"
+                android:layout_toEndOf="@+id/tv_guide"
+                android:id="@+id/imageView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" to next step"
+                android:textColor="#000"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/imageView2"
+                android:layout_toEndOf="@+id/imageView2" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAllOtlet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="13dp"
+            android:layout_below="@+id/relativeLayout" />
+
+
+    </RelativeLayout>
+
+</ScrollView>
+
+    <!--<include layout="@layout/content_main_popupsearch" />-->
+</android.support.design.widget.CoordinatorLayout>

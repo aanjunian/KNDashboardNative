@@ -1,0 +1,482 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="top"
+    android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context=".MainMenu">
+
+    <ScrollView
+        android:id="@+id/sv_checkin_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_showMap"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/slider"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btn_getPosition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Get Position"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/btn_innermenu"/>
+
+                    <!--<addons.maps.MyMapFragmentContainer-->
+                    <!--android:id="@+id/mymapcontainer"-->
+                    <!--android:layout_below="@+id/btn_getPosition"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="250dp">-->
+                    <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="250dp"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_marginBottom="50dp"-->
+                    <!--android:gravity="center_horizontal" >-->
+                    <!--<fragment-->
+                    <!--android:id="@+id/map"-->
+                    <!--android:name="com.google.android.gms.maps.MapFragment"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="500dp"-->
+                    <!--android:apiKey="AIzaSyB7SCsW5IEn5jpRPlHEj16Srm8_oo62XhQ"-->
+                    <!--android:clickable="true"-->
+                    <!--android:enabled="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true" />-->
+                    <!--</RelativeLayout>-->
+                    <!--</addons.maps.MyMapFragmentContainer>-->
+
+                    <TableLayout
+                        android:id="@+id/tl_position"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/btn_getPosition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                    </TableLayout>
+
+                    <Button
+                        android:id="@+id/viewMap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="View Location on Map"
+                        android:textColor="#FFF"
+                        android:background="@drawable/btn_innermenu"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/btnRefreshMaps" />
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Long :"-->
+                    <!--android:id="@+id/tv_longitude"-->
+                    <!--android:layout_below="@+id/tl_position"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true" />-->
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Lat :"-->
+                    <!--android:id="@+id/tv_latitiude"-->
+                    <!--android:layout_below="@+id/tv_longitude"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_accuracy"
+                        android:layout_below="@+id/tl_position"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <!--<Button-->
+                    <!--android:id="@+id/btn_refresh"-->
+                    <!--android:layout_below="@+id/tl_position"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:text="Refresh"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:background="@drawable/button"/>-->
+
+                    <Button
+                        android:id="@+id/btnRefreshMaps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Refresh Location"
+                        android:textColor="#FFF"
+                        android:background="@drawable/btn_innermenu"
+                        android:layout_alignTop="@+id/tv_accuracy"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                </RelativeLayout>
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    />
+
+                <!--<android.support.design.widget.TabLayout-->
+                    <!--android:id="@+id/tabLayout"-->
+                    <!--android:scrollbars="horizontal"-->
+                    <!--android:layout_below="@+id/toolbar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/primary_color_theme"-->
+                    <!--app:tabMode="scrollable"/>-->
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_mnCheckinDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Back"
+                    android:textColor="#FFF"
+                    android:background="@drawable/btn_innermenu"/>
+
+                <TextView
+                    android:id="@+id/tv_region"
+                    android:layout_below="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Region"
+                    android:textColor="#000" />
+                <TextView
+                    android:id="@+id/txtHDId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="txthdId"
+                    android:visibility="gone" />
+                <Spinner
+                    android:id="@+id/spn_region"
+                    android:layout_below="@+id/tv_region"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/bg_edtext"/>
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/spn_region"
+                    android:layout_marginTop="10dp"
+                    android:background="#bfbfbf" />
+                <TextView
+                    android:id="@+id/tv_branch"
+                    android:layout_below="@+id/view1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Branch"
+                    android:textColor="#000"/>
+                <Spinner
+                    android:id="@+id/spn_branch"
+                    android:layout_below="@+id/tv_branch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/bg_edtext" />
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/spn_branch"
+                    android:layout_marginTop="10dp"
+                    android:background="#bfbfbf" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type Search"
+                    android:id="@+id/tv_type_search"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/view2"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"/>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rg_type_search"
+                    android:layout_below="@+id/tv_type_search">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Id"
+                        android:checked="true"
+                        android:id="@+id/rb_outletID"
+                        android:layout_below="@+id/tv_type_search"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outlet Name"
+                        android:id="@+id/rb_outletName"
+                        android:layout_below="@+id/rb_outletID"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/rg_type_search"
+                    android:background="#bfbfbf" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rl_typeoutletgrup"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/view3"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_type_outlet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Type Outlet"
+                        android:textColor="#000"/>
+
+                    <Spinner
+                        android:id="@+id/spn_type_outlet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_type_outlet"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/bg_edtext" />
+                    <View
+                        android:id="@+id/view4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#bfbfbf"
+                        android:layout_below="@+id/spn_type_outlet"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Outlet Id :"
+                    android:id="@+id/tv_outletID"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/rl_typeoutletgrup"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"/>
+
+                <EditText
+                    android:lines="1"
+                    android:gravity="top|left"
+                    android:imeOptions="actionDone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_searchData"
+                    android:background="@drawable/bg_edtext"
+                    android:layout_weight="1"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:drawableRight="@drawable/ic_search_black_24dp"
+                    android:layout_below="@+id/tv_outletID"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Press Button "
+                    android:id="@+id/tv_guide"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/et_searchData"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_search_black_24dp"
+                    android:layout_alignBottom="@+id/tv_guide"
+                    android:layout_toRightOf="@+id/tv_guide"
+                    android:layout_toEndOf="@+id/tv_guide"
+                    android:id="@+id/imageView2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" to next step"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:layout_above="@+id/tv_outlet_name"
+                    android:layout_toRightOf="@+id/imageView2"
+                    android:layout_toEndOf="@+id/imageView2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Outlet Name :"
+                    android:id="@+id/tv_outlet_name"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/tv_guide"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Longitude"
+                    android:id="@+id/tv_long"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/tv_outlet_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"/>
+
+                <EditText
+                    android:inputType="text"
+                    android:lines="1"
+                    android:gravity="top|left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_long"
+                    android:background="@drawable/bg_edtext"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_below="@+id/tv_long"/>
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#bfbfbf"
+                    android:layout_below="@+id/et_long"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Latitude"
+                    android:id="@+id/tv_lat"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/view5"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"/>
+
+                <EditText
+                    android:inputType="text"
+                    android:lines="1"
+                    android:gravity="top|left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_lat"
+                    android:background="@drawable/bg_edtext"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_below="@+id/tv_lat"/>
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#bfbfbf"
+                    android:layout_below="@+id/et_lat"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accuration"
+                    android:id="@+id/tv_acc"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/view6"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"/>
+
+                <EditText
+                    android:inputType="text"
+                    android:lines="1"
+                    android:gravity="top|left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_acc"
+                    android:background="@drawable/bg_edtext"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_below="@+id/tv_acc"/>
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#bfbfbf"
+                    android:layout_below="@+id/et_acc"/>
+
+                <Button
+                    android:id="@+id/btn_checkin"
+                    android:layout_below="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Check In Outlet"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/btn_innermenu"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

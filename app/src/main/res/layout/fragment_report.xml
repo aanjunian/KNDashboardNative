@@ -1,0 +1,142 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/sv_report"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="top"
+    android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context=".MainMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_report">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_report"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:text="Type Report"
+                            android:textColor="#000"/>
+                        <Spinner
+                            android:id="@+id/spn_report"
+                            android:layout_below="@+id/tv_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/bg_edtext" />
+                        <View
+                            android:id="@+id/view22"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/spn_report"
+                            android:layout_marginTop="10dp"
+                            android:background="#bfbfbf" />
+
+                        <TextView
+                            android:id="@+id/tv_region"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/view22"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:text="Region"
+                            android:textColor="#000" />
+                        <TextView
+                            android:id="@+id/txtHDId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="txthdId"
+                            android:visibility="gone" />
+                        <Spinner
+                            android:id="@+id/spn_region"
+                            android:layout_below="@+id/tv_region"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/bg_edtext"/>
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/spn_region"
+                            android:layout_marginTop="10dp"
+                            android:background="#bfbfbf" />
+                        <TextView
+                            android:id="@+id/tv_branch"
+                            android:layout_below="@+id/view1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:text="Branch"
+                            android:textColor="#000"/>
+                        <Spinner
+                            android:id="@+id/spn_branch"
+                            android:layout_below="@+id/tv_branch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/bg_edtext" />
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/spn_branch"
+                            android:layout_marginTop="10dp"
+                            android:background="#bfbfbf" />
+
+                        <Button
+                            android:id="@+id/btn_view_data"
+                            android:layout_below="@+id/view2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:text="View Data"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/btn_innermenu"/>
+
+                        <TableLayout
+                            android:id="@+id/tl_data_report"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/btn_view_data"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+                        </TableLayout>
+
+                </LinearLayout>
+
+
+
+                <!--<android.support.design.widget.FloatingActionButton-->
+                    <!--android:id="@+id/fab"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="bottom|center_horizontal"-->
+                    <!--android:layout_marginBottom="@dimen/action_button_margin"-->
+                    <!--android:src="@drawable/ic_keyboard_arrow_up_white_48dp"-->
+                    <!--android:visibility="invisible"/>-->
+
+
+        </LinearLayout>
+</ScrollView>
