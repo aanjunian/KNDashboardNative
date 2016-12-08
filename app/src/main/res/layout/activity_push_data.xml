@@ -11,70 +11,56 @@
     android:padding="15dp"
     android:orientation="vertical">
 
-    <TextView
-      android:id="@+id/tv1"
-        android:visibility="gone"
-       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_medium"
-      android:textColor="#000"
-      android:text="Sales" />
-    
-    <TableLayout
-        android:visibility="gone"
-        android:id="@+id/tlSOHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-       </TableLayout>
-
     <!--<TextView-->
-        <!--android:id="@+id/tv11"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textColor="#000"-->
-        <!--android:text="Sales Detail" />-->
-
+      <!--android:id="@+id/tv1"-->
+        <!--android:visibility="gone"-->
+       <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="@dimen/text_size_medium"-->
+      <!--android:textColor="#000"-->
+      <!--android:text="Sales" />-->
+    <!---->
     <!--<TableLayout-->
-        <!--android:id="@+id/tlSODetail"-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/tlSOHeader"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content" >-->
 
-    <!--</TableLayout>-->
-     
-    <TextView
-        android:visibility="gone"
-      android:id="@+id/tv2"
-       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_medium"
-        android:layout_marginTop="5dp"
-      android:textColor="#000"
-      android:text="Activity" />
-    
-    <TableLayout
-        android:visibility="gone"
-      android:id="@+id/tlActivity"
-        android:layout_width="match_parent"
-       android:layout_height="wrap_content" >
-       </TableLayout>
-     
-    <TextView
-        android:visibility="gone"
-      android:id="@+id/tv3"
-       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_medium"
-        android:layout_marginTop="5dp"
-      android:textColor="#000"
-      android:text="Customer Base" />
-    
-    <TableLayout
-        android:visibility="gone"
-      android:id="@+id/tl_cb"
-        android:layout_width="match_parent"
-       android:layout_height="wrap_content" >
-       </TableLayout>
+       <!--</TableLayout>-->
+     <!---->
+    <!--<TextView-->
+        <!--android:visibility="gone"-->
+      <!--android:id="@+id/tv2"-->
+       <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="@dimen/text_size_medium"-->
+        <!--android:layout_marginTop="5dp"-->
+      <!--android:textColor="#000"-->
+      <!--android:text="Activity" />-->
+    <!---->
+    <!--<TableLayout-->
+        <!--android:visibility="gone"-->
+      <!--android:id="@+id/tlActivity"-->
+        <!--android:layout_width="match_parent"-->
+       <!--android:layout_height="wrap_content" >-->
+       <!--</TableLayout>-->
+     <!---->
+    <!--<TextView-->
+        <!--android:visibility="gone"-->
+      <!--android:id="@+id/tv3"-->
+       <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="@dimen/text_size_medium"-->
+        <!--android:layout_marginTop="5dp"-->
+      <!--android:textColor="#000"-->
+      <!--android:text="Customer Base" />-->
+    <!---->
+    <!--<TableLayout-->
+        <!--android:visibility="gone"-->
+      <!--android:id="@+id/tl_cb"-->
+        <!--android:layout_width="match_parent"-->
+       <!--android:layout_height="wrap_content" >-->
+       <!--</TableLayout>-->
      
     <TextView
       android:id="@+id/tv4"
@@ -91,22 +77,22 @@
        android:layout_height="wrap_content" >
        </TableLayout>
      
-    <TextView
-      android:id="@+id/tv5"
-        android:visibility="gone"
-       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_medium"
-        android:layout_marginTop="5dp"
-      android:textColor="#000"
-      android:text="Leave" />
-    
-    <TableLayout
-        android:visibility="gone"
-      android:id="@+id/tl_leave"
-        android:layout_width="match_parent"
-       android:layout_height="wrap_content" >
-       </TableLayout>
+    <!--<TextView-->
+      <!--android:id="@+id/tv5"-->
+        <!--android:visibility="gone"-->
+       <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="@dimen/text_size_medium"-->
+        <!--android:layout_marginTop="5dp"-->
+      <!--android:textColor="#000"-->
+      <!--android:text="Leave" />-->
+    <!---->
+    <!--<TableLayout-->
+        <!--android:visibility="gone"-->
+      <!--android:id="@+id/tl_leave"-->
+        <!--android:layout_width="match_parent"-->
+       <!--android:layout_height="wrap_content" >-->
+       <!--</TableLayout>-->
 
         <Button
             android:id="@+id/btnPush"
@@ -117,6 +103,17 @@
             android:textColor="@color/white"
             android:background="@drawable/btn_innermenu"
             android:text="Push Data" />
+
+    <TextView
+        android:id="@+id/tv_noData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_vertical"
+        android:visibility="gone"
+        android:text="NO DATA TO PUSH"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"/>
 
 </LinearLayout>
     </ScrollView>

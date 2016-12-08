@@ -23,7 +23,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -40,9 +39,6 @@ import come.example.viewbadger.ShortcutBadger;
 import library.common.clsPushData;
 import library.common.dataJson;
 import library.common.tAbsenUserData;
-import library.common.tActivityData;
-import library.common.tCustomerBasedMobileHeaderData;
-import library.common.tLeaveMobileData;
 import library.common.tNotificationData;
 import library.common.tUserCheckinData;
 import library.dal.clsHardCode;
@@ -58,6 +54,7 @@ public class FragmentPushData extends Fragment {
     private TableLayout tlLeave;
     private Button btnPush;
     private String myValue;
+    private TextView tvNoData, tvUserCheckin;
 
     View v;
 
@@ -85,12 +82,10 @@ public class FragmentPushData extends Fragment {
 //        Intent serviceIntentMyServiceNative = new Intent(getContext(), MyServiceNative.class);
 //        getContext().stopService(serviceIntentMyServiceNative);
 
-        tlSOHeader = (TableLayout) v.findViewById(R.id.tlSOHeader);
-        tlActivity = (TableLayout) v.findViewById(R.id.tlActivity);
-        tlCustomerBase = (TableLayout) v.findViewById(R.id.tl_cb);
         tlAbsen = (TableLayout) v.findViewById(R.id.tl_absen);
-        tlLeave = (TableLayout) v.findViewById(R.id.tl_leave);
         btnPush = (Button) v.findViewById(R.id.btnPush);
+        tvNoData = (TextView) v.findViewById(R.id.tv_noData);
+        tvUserCheckin = (TextView) v.findViewById(R.id.tv4);
 
         btnPush.setTextColor(Color.parseColor("#FFFFFF"));
 
@@ -106,16 +101,13 @@ public class FragmentPushData extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        clsPushData dtJson= new clsHelperBL().pushData();
-                        try {
-                            if(dtJson.getDtdataJson().txtJSON().toString().equals("{\"txtUserId\":\"114\"}")){
-                                new clsMainActivity().showCustomToast(getContext(), "No Data To Push..", false);
-                            } else {
-                                AsyncCallRole task=new AsyncCallRole();
-                                task.execute();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        clsPushData dtclsPushData= new clsHelperBL().pushData();
+                        dataJson dataJson =dtclsPushData.getDtdataJson();
+                        if(dataJson.getListOftUserCheckinData()!=null){
+                            new clsMainActivity().showCustomToast(getContext(), "No Data To Push..", false);
+                        } else {
+                            AsyncCallRole task=new AsyncCallRole();
+                            task.execute();
                         }
                     }
                 });
@@ -146,40 +138,44 @@ public class FragmentPushData extends Fragment {
         if(dtclsPushData!=null){
             dataJson dtJson =dtclsPushData.getDtdataJson();
 
-            if(dtJson.getListOftSalesProductHeaderData()!=null){
-//                initSOHeader(getContext(),dtJson.getListOftSalesProductHeaderData());
-            } else {
-//                initSOHeader(getContext(),null);
-            }
-
-            if(dtJson.getListOftActivityData()!=null){
-                initActivity(getContext(),dtJson.getListOftActivityData());
-            } else {
-                initActivity(getContext(),null);
-            }
-
-            if(dtJson.get_ListOftCustomerBasedMobileHeaderData()!=null){
-                initCustomerBase(getContext(),dtJson.get_ListOftCustomerBasedMobileHeaderData());
-            } else {
-                initCustomerBase(getContext(),null);
-            }
-
-            if(dtJson.getListOftAbsenUserData()!=null){
-                inittAbsen(getContext(),dtJson.getListOftAbsenUserData());
-            } else {
-                inittAbsen(getContext(),null);
-            }
-
-            if(dtJson.getListOftLeaveMobileData()!=null){
-                inittLeave(getContext(),dtJson.getListOftLeaveMobileData());
-            } else {
-                inittLeave(getContext(),null);
-            }
+//            if(dtJson.getListOftSalesProductHeaderData()!=null){
+////                initSOHeader(getContext(),dtJson.getListOftSalesProductHeaderData());
+//            } else {
+////                initSOHeader(getContext(),null);
+//            }
+//
+//            if(dtJson.getListOftActivityData()!=null){
+//                initActivity(getContext(),dtJson.getListOftActivityData());
+//            } else {
+//                initActivity(getContext(),null);
+//            }
+//
+//            if(dtJson.get_ListOftCustomerBasedMobileHeaderData()!=null){
+//                initCustomerBase(getContext(),dtJson.get_ListOftCustomerBasedMobileHeaderData());
+//            } else {
+//                initCustomerBase(getContext(),null);
+//            }
+//
+//            if(dtJson.getListOftAbsenUserData()!=null){
+//                inittAbsen(getContext(),dtJson.getListOftAbsenUserData());
+//            } else {
+//                inittAbsen(getContext(),null);
+//            }
+//
+//            if(dtJson.getListOftLeaveMobileData()!=null){
+//                inittLeave(getContext(),dtJson.getListOftLeaveMobileData());
+//            } else {
+//                inittLeave(getContext(),null);
+//            }
 
             if(dtJson.getListOftUserCheckinData()!=null){
                 initUserCheckin(getContext(),dtJson.getListOftUserCheckinData());
             } else {
-                initUserCheckin(getContext(),null);
+//                initUserCheckin(getContext(),null);
+                tlAbsen.setVisibility(View.INVISIBLE);
+                btnPush.setVisibility(View.INVISIBLE);
+                tvUserCheckin.setVisibility(View.INVISIBLE);
+                tvNoData.setVisibility(View.VISIBLE);
             }
 
         }
@@ -265,248 +261,248 @@ public class FragmentPushData extends Fragment {
         }
     }
 
-    private void inittLeave(Context context, List<tLeaveMobileData> listOftLeaveMobileData) {
-        tlLeave = (TableLayout) v.findViewById(R.id.tl_leave);
-
-        tlLeave.removeAllViews();
-
-        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
-        params.setMargins(1, 1, 1, 1);
-
-        TableRow tr = new TableRow(getContext());
-
-        String[] colTextHeader = {"No.", "Reason", "Type", "Date"};
-
-        for (String text : colTextHeader) {
-            TextView tv = new TextView(getContext());
-
-            tv.setTextSize(14);
-            tv.setPadding(10, 10, 10, 10);
-            tv.setText(text);
-            tv.setGravity(Gravity.CENTER);
-            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
-            tv.setTextColor(Color.WHITE);
-            tv.setLayoutParams(params);
-
-            tr.addView(tv);
-        }
-        tlLeave.addView(tr);
-
-        if(listOftLeaveMobileData!=null){
-            int index = 1;
-            for(tLeaveMobileData dat : listOftLeaveMobileData){
-                tr = new TableRow(getContext());
-
-                TextView tv_index = new TextView(getContext());
-                tv_index.setTextSize(12);
-                tv_index.setPadding(10, 10, 10, 10);
-                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                tv_index.setTextColor(Color.BLACK);
-                tv_index.setGravity(Gravity.CENTER);
-                tv_index.setText(String.valueOf(index + "."));
-                tv_index.setLayoutParams(params);
-
-                tr.addView(tv_index);
-
-                TextView outlet_code = new TextView(getContext());
-                outlet_code.setTextSize(12);
-                outlet_code.setPadding(10, 10, 10, 10);
-                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_code.setTextColor(Color.BLACK);
-                outlet_code.setGravity(Gravity.CENTER);
-                outlet_code.setText(dat.get_txtAlasan());
-                outlet_code.setLayoutParams(params);
-
-                tr.addView(outlet_code);
-
-                TextView outlet_name = new TextView(getContext());
-                outlet_name.setTextSize(12);
-                outlet_name.setPadding(10, 10, 10, 10);
-                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_name.setTextColor(Color.BLACK);
-                outlet_name.setGravity(Gravity.CENTER);
-                outlet_name.setText(dat.get_txtTypeAlasanName());
-                outlet_name.setLayoutParams(params);
-
-                tr.addView(outlet_name);
-
-                TextView date = new TextView(getContext());
-                date.setTextSize(12);
-                date.setPadding(10, 10, 10, 10);
-                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                date.setTextColor(Color.BLACK);
-                date.setGravity(Gravity.CENTER);
-                date.setText(new clsMainActivity().giveFormatDate2(dat.get_dtLeave()));
-                date.setLayoutParams(params);
-
-                tr.addView(date);
-
-                tlLeave.addView(tr,index++);
-            }
-        }
-    }
-
-    private void initCustomerBase(Context context, List<tCustomerBasedMobileHeaderData> listOftCustomerBasedMobileHeaderData) {
-
-        tlCustomerBase.removeAllViews();
-
-        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
-        params.setMargins(1, 1, 1, 1);
-
-        TableRow tr = new TableRow(getContext());
-
-        String[] colTextHeader = {"No.", "Code", "Date", "Branch Code"};
-
-        for (String text : colTextHeader) {
-            TextView tv = new TextView(getContext());
-
-            tv.setTextSize(14);
-            tv.setPadding(10, 10, 10, 10);
-            tv.setText(text);
-            tv.setGravity(Gravity.CENTER);
-            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
-            tv.setTextColor(Color.WHITE);
-            tv.setLayoutParams(params);
-
-            tr.addView(tv);
-        }
-        tlCustomerBase.addView(tr,0);
-
-        if(listOftCustomerBasedMobileHeaderData!=null){
-            int index = 1;
-            for(tCustomerBasedMobileHeaderData dat : listOftCustomerBasedMobileHeaderData){
-                tr = new TableRow(getContext());
-
-                TextView tv_index = new TextView(getContext());
-                tv_index.setTextSize(12);
-                tv_index.setPadding(10, 10, 10, 10);
-                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                tv_index.setTextColor(Color.BLACK);
-                tv_index.setGravity(Gravity.CENTER);
-                tv_index.setText(String.valueOf(index + "."));
-                tv_index.setLayoutParams(params);
-
-                tr.addView(tv_index);
-
-                TextView outlet_code = new TextView(getContext());
-                outlet_code.setTextSize(12);
-                outlet_code.setPadding(10, 10, 10, 10);
-                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_code.setTextColor(Color.BLACK);
-                outlet_code.setGravity(Gravity.CENTER);
-                outlet_code.setText(dat.get_txtSubmissionId());
-                outlet_code.setLayoutParams(params);
-
-                tr.addView(outlet_code);
-
-                TextView outlet_name = new TextView(getContext());
-                outlet_name.setTextSize(12);
-                outlet_name.setPadding(10, 10, 10, 10);
-                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_name.setTextColor(Color.BLACK);
-                outlet_name.setGravity(Gravity.CENTER);
-                outlet_name.setText(new clsMainActivity().giveFormatDate(dat.get_dtDate()));
-                outlet_name.setLayoutParams(params);
-
-                tr.addView(outlet_name);
-
-                TextView date = new TextView(getContext());
-                date.setTextSize(12);
-                date.setPadding(10, 10, 10, 10);
-                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                date.setTextColor(Color.BLACK);
-                date.setGravity(Gravity.CENTER);
-                date.setText(dat.get_txtBranchCode());
-                date.setLayoutParams(params);
-
-                tr.addView(date);
-
-                tlCustomerBase.addView(tr,index++);
-            }
-        }
-
-
-    }
-
-    private void initActivity(Context context, List<tActivityData> listOftActivityData) {
-
-        tlActivity.removeAllViews();
-
-        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
-        params.setMargins(1, 1, 1, 1);
-
-        TableRow tr = new TableRow(getContext());
-
-        String[] colTextHeader = {"No.", "Desc.", "Date", "Outlet Code"};
-
-        for (String text : colTextHeader) {
-            TextView tv = new TextView(getContext());
-
-            tv.setTextSize(14);
-            tv.setPadding(10, 10, 10, 10);
-            tv.setText(text);
-            tv.setGravity(Gravity.CENTER);
-            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
-            tv.setTextColor(Color.WHITE);
-            tv.setLayoutParams(params);
-
-            tr.addView(tv);
-        }
-        tlActivity.addView(tr,0);
-
-        if(listOftActivityData!=null){
-            int index = 1;
-            for(tActivityData dat : listOftActivityData){
-                tr = new TableRow(getContext());
-
-                TextView tv_index = new TextView(getContext());
-                tv_index.setTextSize(12);
-                tv_index.setPadding(10, 10, 10, 10);
-                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                tv_index.setTextColor(Color.BLACK);
-                tv_index.setGravity(Gravity.CENTER);
-                tv_index.setText(String.valueOf(index + "."));
-                tv_index.setLayoutParams(params);
-
-                tr.addView(tv_index);
-
-                TextView outlet_code = new TextView(getContext());
-                outlet_code.setTextSize(12);
-                outlet_code.setPadding(10, 10, 10, 10);
-                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_code.setTextColor(Color.BLACK);
-                outlet_code.setGravity(Gravity.CENTER);
-                outlet_code.setText(dat.get_txtDesc());
-                outlet_code.setLayoutParams(params);
-
-                tr.addView(outlet_code);
-
-                TextView outlet_name = new TextView(getContext());
-                outlet_name.setTextSize(12);
-                outlet_name.setPadding(10, 10, 10, 10);
-                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_name.setTextColor(Color.BLACK);
-                outlet_name.setGravity(Gravity.CENTER);
-                outlet_name.setText(new clsMainActivity().giveFormatDate(dat.get_dtActivity()));
-                outlet_name.setLayoutParams(params);
-
-                tr.addView(outlet_name);
-
-                TextView date = new TextView(getContext());
-                date.setTextSize(12);
-                date.setPadding(10, 10, 10, 10);
-                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                date.setTextColor(Color.BLACK);
-                date.setGravity(Gravity.CENTER);
-                date.setText(dat.get_txtOutletCode());
-                date.setLayoutParams(params);
-
-                tr.addView(date);
-
-                tlActivity.addView(tr,index++);
-            }
-        }
-    }
+//    private void inittLeave(Context context, List<tLeaveMobileData> listOftLeaveMobileData) {
+//        tlLeave = (TableLayout) v.findViewById(R.id.tl_leave);
+//
+//        tlLeave.removeAllViews();
+//
+//        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
+//        params.setMargins(1, 1, 1, 1);
+//
+//        TableRow tr = new TableRow(getContext());
+//
+//        String[] colTextHeader = {"No.", "Reason", "Type", "Date"};
+//
+//        for (String text : colTextHeader) {
+//            TextView tv = new TextView(getContext());
+//
+//            tv.setTextSize(14);
+//            tv.setPadding(10, 10, 10, 10);
+//            tv.setText(text);
+//            tv.setGravity(Gravity.CENTER);
+//            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
+//            tv.setTextColor(Color.WHITE);
+//            tv.setLayoutParams(params);
+//
+//            tr.addView(tv);
+//        }
+//        tlLeave.addView(tr);
+//
+//        if(listOftLeaveMobileData!=null){
+//            int index = 1;
+//            for(tLeaveMobileData dat : listOftLeaveMobileData){
+//                tr = new TableRow(getContext());
+//
+//                TextView tv_index = new TextView(getContext());
+//                tv_index.setTextSize(12);
+//                tv_index.setPadding(10, 10, 10, 10);
+//                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                tv_index.setTextColor(Color.BLACK);
+//                tv_index.setGravity(Gravity.CENTER);
+//                tv_index.setText(String.valueOf(index + "."));
+//                tv_index.setLayoutParams(params);
+//
+//                tr.addView(tv_index);
+//
+//                TextView outlet_code = new TextView(getContext());
+//                outlet_code.setTextSize(12);
+//                outlet_code.setPadding(10, 10, 10, 10);
+//                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_code.setTextColor(Color.BLACK);
+//                outlet_code.setGravity(Gravity.CENTER);
+//                outlet_code.setText(dat.get_txtAlasan());
+//                outlet_code.setLayoutParams(params);
+//
+//                tr.addView(outlet_code);
+//
+//                TextView outlet_name = new TextView(getContext());
+//                outlet_name.setTextSize(12);
+//                outlet_name.setPadding(10, 10, 10, 10);
+//                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_name.setTextColor(Color.BLACK);
+//                outlet_name.setGravity(Gravity.CENTER);
+//                outlet_name.setText(dat.get_txtTypeAlasanName());
+//                outlet_name.setLayoutParams(params);
+//
+//                tr.addView(outlet_name);
+//
+//                TextView date = new TextView(getContext());
+//                date.setTextSize(12);
+//                date.setPadding(10, 10, 10, 10);
+//                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                date.setTextColor(Color.BLACK);
+//                date.setGravity(Gravity.CENTER);
+//                date.setText(new clsMainActivity().giveFormatDate2(dat.get_dtLeave()));
+//                date.setLayoutParams(params);
+//
+//                tr.addView(date);
+//
+//                tlLeave.addView(tr,index++);
+//            }
+//        }
+//    }
+//
+//    private void initCustomerBase(Context context, List<tCustomerBasedMobileHeaderData> listOftCustomerBasedMobileHeaderData) {
+//
+//        tlCustomerBase.removeAllViews();
+//
+//        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
+//        params.setMargins(1, 1, 1, 1);
+//
+//        TableRow tr = new TableRow(getContext());
+//
+//        String[] colTextHeader = {"No.", "Code", "Date", "Branch Code"};
+//
+//        for (String text : colTextHeader) {
+//            TextView tv = new TextView(getContext());
+//
+//            tv.setTextSize(14);
+//            tv.setPadding(10, 10, 10, 10);
+//            tv.setText(text);
+//            tv.setGravity(Gravity.CENTER);
+//            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
+//            tv.setTextColor(Color.WHITE);
+//            tv.setLayoutParams(params);
+//
+//            tr.addView(tv);
+//        }
+//        tlCustomerBase.addView(tr,0);
+//
+//        if(listOftCustomerBasedMobileHeaderData!=null){
+//            int index = 1;
+//            for(tCustomerBasedMobileHeaderData dat : listOftCustomerBasedMobileHeaderData){
+//                tr = new TableRow(getContext());
+//
+//                TextView tv_index = new TextView(getContext());
+//                tv_index.setTextSize(12);
+//                tv_index.setPadding(10, 10, 10, 10);
+//                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                tv_index.setTextColor(Color.BLACK);
+//                tv_index.setGravity(Gravity.CENTER);
+//                tv_index.setText(String.valueOf(index + "."));
+//                tv_index.setLayoutParams(params);
+//
+//                tr.addView(tv_index);
+//
+//                TextView outlet_code = new TextView(getContext());
+//                outlet_code.setTextSize(12);
+//                outlet_code.setPadding(10, 10, 10, 10);
+//                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_code.setTextColor(Color.BLACK);
+//                outlet_code.setGravity(Gravity.CENTER);
+//                outlet_code.setText(dat.get_txtSubmissionId());
+//                outlet_code.setLayoutParams(params);
+//
+//                tr.addView(outlet_code);
+//
+//                TextView outlet_name = new TextView(getContext());
+//                outlet_name.setTextSize(12);
+//                outlet_name.setPadding(10, 10, 10, 10);
+//                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_name.setTextColor(Color.BLACK);
+//                outlet_name.setGravity(Gravity.CENTER);
+//                outlet_name.setText(new clsMainActivity().giveFormatDate(dat.get_dtDate()));
+//                outlet_name.setLayoutParams(params);
+//
+//                tr.addView(outlet_name);
+//
+//                TextView date = new TextView(getContext());
+//                date.setTextSize(12);
+//                date.setPadding(10, 10, 10, 10);
+//                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                date.setTextColor(Color.BLACK);
+//                date.setGravity(Gravity.CENTER);
+//                date.setText(dat.get_txtBranchCode());
+//                date.setLayoutParams(params);
+//
+//                tr.addView(date);
+//
+//                tlCustomerBase.addView(tr,index++);
+//            }
+//        }
+//
+//
+//    }
+//
+//    private void initActivity(Context context, List<tActivityData> listOftActivityData) {
+//
+//        tlActivity.removeAllViews();
+//
+//        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
+//        params.setMargins(1, 1, 1, 1);
+//
+//        TableRow tr = new TableRow(getContext());
+//
+//        String[] colTextHeader = {"No.", "Desc.", "Date", "Outlet Code"};
+//
+//        for (String text : colTextHeader) {
+//            TextView tv = new TextView(getContext());
+//
+//            tv.setTextSize(14);
+//            tv.setPadding(10, 10, 10, 10);
+//            tv.setText(text);
+//            tv.setGravity(Gravity.CENTER);
+//            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
+//            tv.setTextColor(Color.WHITE);
+//            tv.setLayoutParams(params);
+//
+//            tr.addView(tv);
+//        }
+//        tlActivity.addView(tr,0);
+//
+//        if(listOftActivityData!=null){
+//            int index = 1;
+//            for(tActivityData dat : listOftActivityData){
+//                tr = new TableRow(getContext());
+//
+//                TextView tv_index = new TextView(getContext());
+//                tv_index.setTextSize(12);
+//                tv_index.setPadding(10, 10, 10, 10);
+//                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                tv_index.setTextColor(Color.BLACK);
+//                tv_index.setGravity(Gravity.CENTER);
+//                tv_index.setText(String.valueOf(index + "."));
+//                tv_index.setLayoutParams(params);
+//
+//                tr.addView(tv_index);
+//
+//                TextView outlet_code = new TextView(getContext());
+//                outlet_code.setTextSize(12);
+//                outlet_code.setPadding(10, 10, 10, 10);
+//                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_code.setTextColor(Color.BLACK);
+//                outlet_code.setGravity(Gravity.CENTER);
+//                outlet_code.setText(dat.get_txtDesc());
+//                outlet_code.setLayoutParams(params);
+//
+//                tr.addView(outlet_code);
+//
+//                TextView outlet_name = new TextView(getContext());
+//                outlet_name.setTextSize(12);
+//                outlet_name.setPadding(10, 10, 10, 10);
+//                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_name.setTextColor(Color.BLACK);
+//                outlet_name.setGravity(Gravity.CENTER);
+//                outlet_name.setText(new clsMainActivity().giveFormatDate(dat.get_dtActivity()));
+//                outlet_name.setLayoutParams(params);
+//
+//                tr.addView(outlet_name);
+//
+//                TextView date = new TextView(getContext());
+//                date.setTextSize(12);
+//                date.setPadding(10, 10, 10, 10);
+//                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                date.setTextColor(Color.BLACK);
+//                date.setGravity(Gravity.CENTER);
+//                date.setText(dat.get_txtOutletCode());
+//                date.setLayoutParams(params);
+//
+//                tr.addView(date);
+//
+//                tlActivity.addView(tr,index++);
+//            }
+//        }
+//    }
 
 //    private void initSOHeader(Context context, List<tSalesProductHeaderData> listOftSalesProductHeaderData) {
 //        tlSOHeader = (TableLayout) v.findViewById(R.id.tlSOHeader);
@@ -808,83 +804,83 @@ public class FragmentPushData extends Fragment {
     }
 
 
-    public void inittAbsen(Context _ctx,List<tAbsenUserData> ListData){
-        tlAbsen = (TableLayout) v.findViewById(R.id.tl_absen);
-        tlAbsen.removeAllViews();
-
-        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
-        params.setMargins(1, 1, 1, 1);
-
-        TableRow tr = new TableRow(getContext());
-
-        String[] colTextHeader = {"No.", "Outlet Code", "Outlet Name", "Date"};
-
-        for (String text : colTextHeader) {
-            TextView tv = new TextView(getContext());
-
-            tv.setTextSize(14);
-            tv.setPadding(10, 10, 10, 10);
-            tv.setText(text);
-            tv.setGravity(Gravity.CENTER);
-            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
-            tv.setTextColor(Color.WHITE);
-            tv.setLayoutParams(params);
-
-            tr.addView(tv);
-        }
-        tlAbsen.addView(tr);
-
-        if(ListData!=null){
-            int index = 1;
-            for(tAbsenUserData dat : ListData){
-                tr = new TableRow(getContext());
-
-                TextView tv_index = new TextView(getContext());
-                tv_index.setTextSize(12);
-                tv_index.setPadding(10, 10, 10, 10);
-                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                tv_index.setTextColor(Color.BLACK);
-                tv_index.setGravity(Gravity.CENTER);
-                tv_index.setText(String.valueOf(index + "."));
-                tv_index.setLayoutParams(params);
-
-                tr.addView(tv_index);
-
-                TextView outlet_code = new TextView(getContext());
-                outlet_code.setTextSize(12);
-                outlet_code.setPadding(10, 10, 10, 10);
-                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_code.setTextColor(Color.BLACK);
-                outlet_code.setGravity(Gravity.CENTER);
-                outlet_code.setText(dat.get_txtOutletCode());
-                outlet_code.setLayoutParams(params);
-
-                tr.addView(outlet_code);
-
-                TextView outlet_name = new TextView(getContext());
-                outlet_name.setTextSize(12);
-                outlet_name.setPadding(10, 10, 10, 10);
-                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                outlet_name.setTextColor(Color.BLACK);
-                outlet_name.setGravity(Gravity.CENTER);
-                outlet_name.setText(dat.get_txtOutletName());
-                outlet_name.setLayoutParams(params);
-
-                tr.addView(outlet_name);
-
-                TextView date = new TextView(getContext());
-                date.setTextSize(12);
-                date.setPadding(10, 10, 10, 10);
-                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
-                date.setTextColor(Color.BLACK);
-                date.setGravity(Gravity.CENTER);
-                date.setText(new clsMainActivity().giveFormatDate2(dat.get_dtDateCheckIn()));
-                date.setLayoutParams(params);
-
-                tr.addView(date);
-
-                tlAbsen.addView(tr,index++);
-            }
-        }
-    }
+//    public void inittAbsen(Context _ctx,List<tAbsenUserData> ListData){
+//        tlAbsen = (TableLayout) v.findViewById(R.id.tl_absen);
+//        tlAbsen.removeAllViews();
+//
+//        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1f);
+//        params.setMargins(1, 1, 1, 1);
+//
+//        TableRow tr = new TableRow(getContext());
+//
+//        String[] colTextHeader = {"No.", "Outlet Code", "Outlet Name", "Date"};
+//
+//        for (String text : colTextHeader) {
+//            TextView tv = new TextView(getContext());
+//
+//            tv.setTextSize(14);
+//            tv.setPadding(10, 10, 10, 10);
+//            tv.setText(text);
+//            tv.setGravity(Gravity.CENTER);
+//            tv.setBackgroundColor(Color.parseColor("#4CAF50"));
+//            tv.setTextColor(Color.WHITE);
+//            tv.setLayoutParams(params);
+//
+//            tr.addView(tv);
+//        }
+//        tlAbsen.addView(tr);
+//
+//        if(ListData!=null){
+//            int index = 1;
+//            for(tAbsenUserData dat : ListData){
+//                tr = new TableRow(getContext());
+//
+//                TextView tv_index = new TextView(getContext());
+//                tv_index.setTextSize(12);
+//                tv_index.setPadding(10, 10, 10, 10);
+//                tv_index.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                tv_index.setTextColor(Color.BLACK);
+//                tv_index.setGravity(Gravity.CENTER);
+//                tv_index.setText(String.valueOf(index + "."));
+//                tv_index.setLayoutParams(params);
+//
+//                tr.addView(tv_index);
+//
+//                TextView outlet_code = new TextView(getContext());
+//                outlet_code.setTextSize(12);
+//                outlet_code.setPadding(10, 10, 10, 10);
+//                outlet_code.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_code.setTextColor(Color.BLACK);
+//                outlet_code.setGravity(Gravity.CENTER);
+//                outlet_code.setText(dat.get_txtOutletCode());
+//                outlet_code.setLayoutParams(params);
+//
+//                tr.addView(outlet_code);
+//
+//                TextView outlet_name = new TextView(getContext());
+//                outlet_name.setTextSize(12);
+//                outlet_name.setPadding(10, 10, 10, 10);
+//                outlet_name.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                outlet_name.setTextColor(Color.BLACK);
+//                outlet_name.setGravity(Gravity.CENTER);
+//                outlet_name.setText(dat.get_txtOutletName());
+//                outlet_name.setLayoutParams(params);
+//
+//                tr.addView(outlet_name);
+//
+//                TextView date = new TextView(getContext());
+//                date.setTextSize(12);
+//                date.setPadding(10, 10, 10, 10);
+//                date.setBackgroundColor(Color.parseColor("#f0f0f0"));
+//                date.setTextColor(Color.BLACK);
+//                date.setGravity(Gravity.CENTER);
+//                date.setText(new clsMainActivity().giveFormatDate2(dat.get_dtDateCheckIn()));
+//                date.setLayoutParams(params);
+//
+//                tr.addView(date);
+//
+//                tlAbsen.addView(tr,index++);
+//            }
+//        }
+//    }
 }
